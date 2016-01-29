@@ -2,6 +2,7 @@ package net.proyecto.com;
 
 public class Persona {
 
-	int id;
-	String nom;
+	int IdPersona;
+	String Nombre;
+	String Apellidos;
 }
