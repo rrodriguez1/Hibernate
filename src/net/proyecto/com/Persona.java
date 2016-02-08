@@ -59,7 +59,7 @@ public class Persona {
 		this.idPais = idPais;
 	}
 
-
+// 4.2.21
 	
 
 	@Override
@@ -70,9 +70,8 @@ public class Persona {
 	}
 	
 	
-	public Persona(int idPersona, String nombre, String apellidos, String direccion, Date fechaNacimiento, String idPais) 
+	public Persona(String nombre, String apellidos, String direccion, Date fechaNacimiento, String idPais) 
 	{
-		idPersona = idPersona;
 		nombre = nombre;
 		apellidos = apellidos;
 		direccion = direccion;
@@ -83,7 +82,9 @@ public class Persona {
 	}
 	
 	
-	public void Twitt(String msg)
+	public void Twitt(String msg){
+		twitts.add(new Twitt(idPersona,msg));
+	}
 	
 	
 }
