@@ -2,6 +2,7 @@ package net.proyecto.com;
 
 public class Pais {
 
-	private int IdPais;
-	private String Nombre;
+	private int idPais;
+	private String nombre;
+	private String paIso;
 }
