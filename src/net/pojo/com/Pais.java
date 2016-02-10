@@ -1,4 +1,4 @@
-package net.proyecto.com;
+package net.pojo.com;
 
 public class Pais {
 

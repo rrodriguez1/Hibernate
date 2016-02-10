@@ -1,4 +1,4 @@
-package net.proyecto.com;
+package net.pojo.com;
 
 public class Twitt {
 	private int id;

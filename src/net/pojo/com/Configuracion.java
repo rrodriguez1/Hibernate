@@ -1,7 +1,7 @@
 /**
  * 
  */
-package net.proyecto.com;
+package net.pojo.com;
 
 /**
  * @author Pedro

@@ -1,4 +1,4 @@
-package net.proyecto.com;
+package net.pojo.com;
 
 import java.util.ArrayList;
 import java.util.Date;
