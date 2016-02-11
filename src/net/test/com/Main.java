@@ -2,6 +2,10 @@
  * 
  */
 package net.test.com;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction; 
 import org.hibernate.service.ServiceRegistry;
@@ -20,12 +24,19 @@ public class Main {
 
 	/**
 	 * @param args
+	 * @throws ParseException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		// TODO Auto-generated method stub
 		
 		// pais test para hacer inserts el la base de datos
 		Pais paisTest = new Pais("Espanya","ESP");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		Date nacimiento = sdf.parse("21/02/1994");
+		Persona pedro = new Persona("Pedro","López","Santfe city",nacimiento,"esp");
+		pedro.Twitt("La cosa esta muy mal ");
+		pedro.Twitt("Java caca");
+		pedro.Twitt("Ah julan! :(");
 		
 		// Configuracion hibernate
 		
@@ -41,7 +52,10 @@ public class Main {
         try{
         	tx = session.beginTransaction();
         	session.save(paisTest);
+        	session.save(pedro);
         	tx.commit();
+        	
+        	
         }
         catch (Exception e) 
         {    if (tx!=null) tx.rollback(); e.printStackTrace(); }

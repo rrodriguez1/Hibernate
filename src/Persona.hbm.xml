@@ -1,27 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-<class name="net.pojo.com.Persona" table="persona">
-<id column="idpersona" name="idPersona" type="int">
-<generator class="native">
-</generator></id>
-<property name="nombre">
-<column name="nombre">
-</column></property>
-<property name="apellidos">
-<column name="apellidos">
-</column></property>
-<property name="direccion">
-<column name="direccion">
-</column></property>
-<property name="fechaNacimiento">
-<column name="fechaNacimiento">
-</column></property>
-<property name="fechaAlta">
-<column name="fechaAlta">
-</column></property>
-<property name="idPais">
-<column name="idpais">
-</column></property>
-</class>
+<class name="net.pojo.com.Persona" table="persona"> 
+<meta attribute="class-description">Usser </meta> 
+<id name="idPersona" type="int" column="idpersona"> 
+  <generator class="native"/> 
+</id> 
+
+
+ 
+ <property name="nombre" column="nombre" type="string"/> 
+ <property name="apellidos" column="apellidos" type="string"/> 
+ <property name="direccion" column="direccion" type="string"/> 
+ <property name="fechaNacimiento" column="fechanacimiento" type="date"/> 
+ <property name="fechaAlta" column="fechaalta" type="date"/> 
+ <property name="idPais" column="idpais" type="string"/> 
+ <list name="Twitts" cascade="all">
+ 	<key column="idpersona"/>
+ 	<list-index>
+	 	<column name="idx">
+	 	</column>
+ 	</list-index>
+ 	
+ 	<one-to-many class="net.pojo.com.Twitt"/>
+ </list>
+ 
+ 
+ </class> 
+ 
+ <class name = "net.pojo.com.Twitt" table="twitt">
+ 	<id name="id" type="int" column="idtwit" >
+ 		<generator class="increment"></generator>
+ 	</id>
+   <property name="idPersona" column="idPersona" type="int"/> 
+   <property name="Texto" column="texto" type="string"/> 
+ </class>
+ 
 </hibernate-mapping>

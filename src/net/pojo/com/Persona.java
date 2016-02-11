@@ -2,6 +2,7 @@ package net.pojo.com;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Persona {
 
@@ -11,7 +12,7 @@ public class Persona {
 	private String direccion;
 	private Date fechaNacimiento;
 	private Date fechaAlta;
-	private ArrayList<Twitt> twitts;
+	private List twitts;
 	private String idPais;
 	
 	
@@ -49,7 +50,7 @@ public class Persona {
 	public void setFechaAlta(Date fechaAlta) {
 		this.fechaAlta = fechaAlta;
 	}
-	public ArrayList<Twitt> getTwitts() {
+	public List<Twitt> getTwitts() {
 		return twitts;
 	}
 	public String getIdPais() {
@@ -69,6 +70,7 @@ public class Persona {
 				+ "]";
 	}
 	
+
 	
 	public Persona(String nombre, String apellidos, String direccion, Date fechaNacimiento, String idPais) 
 	{
@@ -82,6 +84,12 @@ public class Persona {
 	}
 	
 	
+	public Date getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+	public void setTwitts(List<Twitt> twitts) {
+		this.twitts = twitts;
+	}
 	public void Twitt(String msg){
 		twitts.add(new Twitt(idPersona,msg));
 	}

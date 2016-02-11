@@ -9,5 +9,6 @@
  <property name="hibernate.connection.username">root</property> 
  <property name="hibernate.connection.password"></property>
  <mapping resource="Pais.hbm.xml"/>
+ <mapping resource="Persona.hbm.xml"/>
    </session-factory> 
 </hibernate-configuration>
