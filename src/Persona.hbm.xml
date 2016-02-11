@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="net.pojo.com.Persona" table="persona">
+<id column="idpersona" name="idPersona" type="int">
+<generator class="native">
+</generator></id>
+<property name="nombre">
+<column name="nombre">
+</column></property>
+<property name="apellidos">
+<column name="apellidos">
+</column></property>
+<property name="direccion">
+<column name="direccion">
+</column></property>
+<property name="fechaNacimiento">
+<column name="fechaNacimiento">
+</column></property>
+<property name="fechaAlta">
+<column name="fechaAlta">
+</column></property>
+<property name="idPais">
+<column name="idpais">
+</column></property>
+</class>
+</hibernate-mapping>

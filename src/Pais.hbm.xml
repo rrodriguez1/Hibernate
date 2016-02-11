@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="net.pojo.com.Pais" table="Pais">
+<id column="paisid" name="idPais" type="int">
+<generator class="native">
+</generator></id>
+<property name="paIso">
+<column name="paiso">
+</column></property>
+<property name="nombre">
+<column name="paisNombre">
+</column></property>
+</class>
+</hibernate-mapping>
