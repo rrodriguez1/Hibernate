@@ -6,7 +6,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.hibernate.Session;
 import org.hibernate.Transaction; 
 import org.hibernate.service.ServiceRegistry;
@@ -18,7 +17,7 @@ import org.hibernate.criterion.Restrictions;
 
 import net.pojo.com.*;
 /**
- * @author Pedro
+ * @author Peter
  *
  */
 public class Main {
@@ -27,6 +26,9 @@ public class Main {
 	 * @param args
 	 * @throws ParseException 
 	 */
+	
+	public SessionFactory sf;
+	
 	public static void main(String[] args) throws ParseException {
 		// TODO Auto-generated method stub
 		
@@ -93,6 +95,73 @@ public class Main {
 		return actualizado;
 	}
 
+	public SessionFactory CreateSessionFactory(){
+		Configuration c=new Configuration();
+
+        c.configure();
+        ServiceRegistry sr=new ServiceRegistryBuilder().applySettings(c.getProperties()).buildServiceRegistry();
+        return c.buildSessionFactory(sr);
+	}
+	
+	public Session Connect(SessionFactory sf){
+		return this.sf.openSession();
+	}
+	
+	
+	public Object GetObject(SessionFactory sf, Class objeto, Integer id ){
+		Session session = Connect(sf);
+		Transaction tx = null;
+		
+		try{
+        	tx = session.beginTransaction();
+        	Object obj = session.get(objeto.getClass(),id);
+        	tx.commit();
+        	return obj;
+        	
+        }
+        catch (Exception e) 
+        {    if (tx!=null) tx.rollback(); e.printStackTrace(); }
+        finally
+
+        { session.close(); }
+		
+		return null;
+	}
+	
+	
+	
+	public Persona GetObjectPersona(Integer id){
+		return (Persona)GetObject(this.sf,Persona.class,id);
+	}
+	
+	public Grupo GetObjectGrupo(Integer id){
+		return (Grupo)GetObject(this.sf,Grupo.class,id);
+	}
+	
+	public Pais GetObjetPais(Integer id){
+		return (Pais)GetObject(this.sf,Pais.class,id);
+	}
+	
+	public void CreateObject(SessionFactory sf,Object obj){
+		Session session = Connect(sf);
+		Transaction tx=null;
+		
+		try{
+        	tx = session.beginTransaction();
+        	session.save(obj);
+        	tx.commit();
+        	
+        	
+        }
+        catch (Exception e) 
+        {    if (tx!=null) tx.rollback(); e.printStackTrace(); }
+        finally
+
+        { session.close(); }
+	}
+	
+	
+	
 	public void Menu(){
 		System.out.print("-------- PIULADES -----------");
 	}
