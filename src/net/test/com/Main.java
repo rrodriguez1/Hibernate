@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.hibernate.Session;
 import org.hibernate.Transaction; 
 import org.hibernate.service.ServiceRegistry;
@@ -65,10 +66,34 @@ public class Main {
         finally
 
         { session.close(); }
-        
-		
-		
-		
 	}
 
+	public Boolean EliminarTwit(Session session,int id) {
+		Boolean eliminado = false;
+		try{
+			Twitt twitt = (Twitt)session.get(Twitt.class,id);
+			session.delete(twitt);
+			eliminado = true;
+		}catch(Exception ex){
+			System.out.print("Twitt No eliminado");
+		}
+		return eliminado;
+	}
+
+	public Boolean UpdateConfiguracion (Session session, Persona persona) {
+		Boolean actualizado = false;
+		try{
+			Persona per = (Persona)session.get(Configuracion.class,persona.getIdPersona());
+			per.setConfiguracion(persona.getConfiguracion());
+			session.update(per);
+			actualizado = true;
+		} catch(Exception ex){
+
+		}
+		return actualizado;
+	}
+
+	public void Menu(){
+		System.out.print("-------- PIULADES -----------");
+	}
 }

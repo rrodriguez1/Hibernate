@@ -8,7 +8,7 @@
  <!--<property name="hibernate.connection.url"> jdbc:mysql://localhost/hibernate </property>-->
  <property name="hibernate.connection.url"> jdbc:mysql://localhost:90/hibernate </property>
 
- <property name="hibernate.connection.username">root</property> 
+ <property name="hibernate.connection.username">hibernate</property>
  <property name="hibernate.connection.password"></property>
  <mapping resource="Pais.hbm.xml"/>
  <mapping resource="Persona.hbm.xml"/>
