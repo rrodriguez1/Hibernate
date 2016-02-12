@@ -49,11 +49,9 @@ public class Configuracion {
 		Privado = privado;
 	}
 	public Configuracion(int idPersona, String estado, String fondo, Boolean privado) {
-		IdPersona = idPersona;
-		Estado = estado;
-		Fondo = fondo;
-		Privado = privado;
+		this.IdPersona = idPersona;
+		this.Estado = estado;
+		this.Fondo = fondo;
+		this.Privado = privado;
 	}
-    
-    
 }

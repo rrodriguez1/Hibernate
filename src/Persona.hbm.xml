@@ -5,10 +5,7 @@
 <meta attribute="class-description">Usser </meta> 
 <id name="idPersona" type="int" column="idpersona"> 
   <generator class="native"/> 
-</id> 
-
-
- 
+</id>
  <property name="nombre" column="nombre" type="string"/> 
  <property name="apellidos" column="apellidos" type="string"/> 
  <property name="direccion" column="direccion" type="string"/> 
@@ -24,7 +21,11 @@
  	
  	<one-to-many class="net.pojo.com.Twitt"/>
  </list>
- 
+
+    <set name="Grupos" cascade="save-update" table="GrupoPersona">
+        <key column="IdPersona"/>
+        <many-to-many column="idGrupo" class="Grupo"/>
+    </set>
  
  </class> 
  
@@ -35,5 +36,14 @@
    <property name="idPersona" column="idPersona" type="int"/> 
    <property name="Texto" column="texto" type="string"/> 
  </class>
+
+ <class name="net.pojo.com.Grupo" table="Grupo">
+     <id name="idGrupo" type="int" column="idgrupo">
+         <generator class="increment"></generator>
+     </id>
+     <property name="nombre" column="nombre" type="string"/>
+     <property name="fechaCreacion" column="idPersona" type="date"/>
+ </class>
+
  
 </hibernate-mapping>

@@ -36,8 +36,6 @@ public class Twitt {
 	}
 	public Twitt(int idPersona2, String texto) {
 		this.idPersona = idPersona2;
-		Texto = texto;
+		this.Texto = texto;
 	}
-	
-	
 }

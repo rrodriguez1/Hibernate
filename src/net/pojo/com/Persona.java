@@ -3,6 +3,7 @@ package net.pojo.com;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 public class Persona {
 
@@ -14,7 +15,7 @@ public class Persona {
 	private Date fechaAlta;
 	private List twitts;
 	private String idPais;
-	
+	private Set Grupos;
 	
 	
 	public int getIdPersona() {
@@ -56,6 +57,15 @@ public class Persona {
 	public String getIdPais() {
 		return idPais;
 	}
+
+	public Set getGrupos() {
+		return Grupos;
+	}
+
+	public void setGrupos(Set grupos) {
+		Grupos = grupos;
+	}
+
 	public void setIdPais(String idPais) {
 		this.idPais = idPais;
 	}
