@@ -164,5 +164,8 @@ public class Main {
 	
 	public void Menu(){
 		System.out.print("-------- PIULADES -----------");
+		System.out.print("-------- PIULADES -----------");
+		System.out.print("-------- PIULADES -----------");
+		System.out.print("-------- PIULADES -----------");
 	}
 }
