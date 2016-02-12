@@ -34,11 +34,12 @@ public class Main {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		Date nacimiento = sdf.parse("21/02/1994");
 		Grupo perroflautas = new Grupo("perroflautas");
-		Persona pedro = new Persona("Pedro","López","Santfe city",nacimiento,"esp");
+		Persona pedro = new Persona("Pedro","Lï¿½pez","Santfe city",nacimiento,"esp");
 		pedro.Twitt("La cosa esta muy mal ");
 		pedro.Twitt("Java caca");
 		pedro.Twitt("Ah julan! :(");
 		pedro.addGrupo(perroflautas);
+		pedro.Configuracion("EN LINEA","AZUL",false);
 		
 		// Configuracion hibernate
 		

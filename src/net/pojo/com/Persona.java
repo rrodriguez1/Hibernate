@@ -17,8 +17,16 @@ public class Persona {
 	private List twitts;
 	private String idPais;
 	private Set Grupos;
-	
-	
+	private Configuracion configuracion;
+
+	public Configuracion getConfiguracion() {
+		return configuracion;
+	}
+
+	public void setConfiguracion(Configuracion configuracion) {
+		this.configuracion = configuracion;
+	}
+
 	public int getIdPersona() {
 		return idPersona;
 	}
@@ -104,6 +112,9 @@ public class Persona {
 	}
 	public void Twitt(String msg){
 		twitts.add(new Twitt(idPersona,msg));
+	}
+	public void Configuracion(String estado,String fondo, Boolean privado){
+		this.configuracion = new Configuracion(idPersona,estado,fondo,privado);
 	}
 	
 	public void addGrupo(Grupo grupo){
