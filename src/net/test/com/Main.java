@@ -33,10 +33,12 @@ public class Main {
 		Pais paisTest = new Pais("Espanya","ESP");
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		Date nacimiento = sdf.parse("21/02/1994");
+		Grupo perroflautas = new Grupo("perroflautas");
 		Persona pedro = new Persona("Pedro","López","Santfe city",nacimiento,"esp");
 		pedro.Twitt("La cosa esta muy mal ");
 		pedro.Twitt("Java caca");
 		pedro.Twitt("Ah julan! :(");
+		pedro.addGrupo(perroflautas);
 		
 		// Configuracion hibernate
 		

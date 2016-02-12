@@ -2,6 +2,7 @@ package net.pojo.com;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -91,6 +92,7 @@ public class Persona {
 		twitts = new ArrayList<Twitt>();
 		this.idPais = idPais;
 		this.fechaAlta = new Date();
+		this.Grupos = new HashSet();
 	}
 	
 	
@@ -102,6 +104,10 @@ public class Persona {
 	}
 	public void Twitt(String msg){
 		twitts.add(new Twitt(idPersona,msg));
+	}
+	
+	public void addGrupo(Grupo grupo){
+		this.Grupos.add(grupo);
 	}
 	
 	

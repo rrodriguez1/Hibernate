@@ -24,7 +24,7 @@
 
     <set name="Grupos" cascade="save-update" table="GrupoPersona">
         <key column="IdPersona"/>
-        <many-to-many column="idGrupo" class="Grupo"/>
+        <many-to-many column="idGrupo" class="net.pojo.com.Grupo"/>
     </set>
  
  </class> 
@@ -42,7 +42,7 @@
          <generator class="increment"></generator>
      </id>
      <property name="nombre" column="nombre" type="string"/>
-     <property name="fechaCreacion" column="idPersona" type="date"/>
+     <property name="fechaCreacion" column="fechacreacion" type="date"/>
  </class>
 
  
