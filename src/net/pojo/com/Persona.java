@@ -74,13 +74,13 @@ public class Persona {
 	
 	public Persona(String nombre, String apellidos, String direccion, Date fechaNacimiento, String idPais) 
 	{
-		nombre = nombre;
-		apellidos = apellidos;
-		direccion = direccion;
-		fechaNacimiento = fechaNacimiento;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.direccion = direccion;
+		this.fechaNacimiento = fechaNacimiento;
 		twitts = new ArrayList<Twitt>();
 		this.idPais = idPais;
-		fechaAlta = new Date();
+		this.fechaAlta = new Date();
 	}
 	
 	
