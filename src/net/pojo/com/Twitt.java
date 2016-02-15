@@ -32,7 +32,7 @@ public class Twitt {
 	}
 	@Override
 	public String toString() {
-		return "Twitt [idPersona=" + idPersona + ", Texto=" + Texto + "]";
+		return  Texto ;
 	}
 	public Twitt(int idPersona2, String texto) {
 		this.idPersona = idPersona2;

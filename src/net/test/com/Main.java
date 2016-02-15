@@ -30,11 +30,11 @@ public class Main {
 	 * @throws ParseException 
 	 */
 	
-	public SessionFactory sf;
+	public static SessionFactory sf;
 	
-	public static void main(String[] args) throws ParseException {
+	public static void main(String[] args) throws ParseException, NumberFormatException, IOException {
 		// TODO Auto-generated method stub
-		
+		/*
 		// pais test para hacer inserts el la base de datos
 		Pais paisTest = new Pais("Espanya","ESP");
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -71,6 +71,9 @@ public class Main {
         finally
 
         { session.close(); }
+        */
+		sf =CreateSessionFactory();
+		Menu();
 	}
 
 	public Boolean EliminarTwit(Session session,int id) {
@@ -86,12 +89,12 @@ public class Main {
 	}
 
 	public Boolean UpdatePersoma (Persona persona) {
-		Session session = Connect(this.sf);
+		Session session = Connect(sf);
 		Boolean actualizado = false;
 		try{
-			Persona per = (Persona)session.get(Configuracion.class,persona.getIdPersona());
-			per.setConfiguracion(persona.getConfiguracion());
-			session.update(per);
+			//Persona per = (Persona)session.get(Configuracion.class,persona.getIdPersona());
+			//per.setConfiguracion(persona.getConfiguracion());
+			session.update(persona);
 			actualizado = true;
 		} catch(Exception ex){
 
@@ -100,7 +103,7 @@ public class Main {
 	}
 
 	
-	public SessionFactory CreateSessionFactory(){
+	public static SessionFactory CreateSessionFactory(){
 		Configuration c=new Configuration();
 
         c.configure();
@@ -108,12 +111,12 @@ public class Main {
         return c.buildSessionFactory(sr);
 	}
 	
-	public Session Connect(SessionFactory sf){
-		return this.sf.openSession();
+	public static Session Connect(SessionFactory sf){
+		return sf.openSession();
 	}
 	
 	
-	public Object GetObject(SessionFactory sf, Class objeto, Integer id ){
+	public static Object GetObject(SessionFactory sf, Class objeto, Integer id ){
 		Session session = Connect(sf);
 		Transaction tx = null;
 		
@@ -135,8 +138,8 @@ public class Main {
 	
 	
 	
-	public Persona GetObjectPersona(Integer id){
-		return (Persona)GetObject(this.sf,Persona.class,id);
+	public static Persona GetObjectPersona(Integer id){
+		return (Persona)GetObject(sf,Persona.class,id);
 	}
 	
 	public Grupo GetObjectGrupo(Integer id){
@@ -149,7 +152,7 @@ public class Main {
 	
 	
 	// crear objeto en la base de datps
-	public void CreateObject(SessionFactory sf,Object obj){
+	public static void CreateObject(SessionFactory sf,Object obj){
 		Session session = Connect(sf);
 		Transaction tx=null;
 		
@@ -169,7 +172,7 @@ public class Main {
 	
 	
 	/// Creates 
-	public void CrearPais() throws IOException
+	public static void CrearPais() throws IOException
 	{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String nom, iso;
@@ -179,22 +182,22 @@ public class Main {
 		iso = br.readLine();
 		
 		Pais pais = new Pais(nom,iso);
-		CreateObject(this.sf,pais);
+		CreateObject(sf,pais);
 		
 		
 	}
 	
-	public void CrearGrupo() throws IOException {
+	public static void CrearGrupo() throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String nom;
 		System.out.print("Nom del Grup");
 		nom = br.readLine();
 		
 		Grupo grupo = new Grupo(nom);
-		CreateObject(this.sf,grupo);
+		CreateObject(sf,grupo);
 	}
 	
-	public void CrearPersona() throws IOException , ParseException
+	public static void CrearPersona() throws IOException , ParseException
 	{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -217,23 +220,23 @@ public class Main {
 		
 		persona.Configuracion("", "#fffff", false);
 		
-		CreateObject(this.sf,persona);
+		CreateObject(sf,persona);
 		
 	}
 	
-	public void MenuPersona(Persona persona) throws IOException
+	public static void MenuPersona(Persona persona) throws IOException
 	{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		System.out.print("---- PIULADES - Usuari ------");
-		System.out.print("---- PIULADES - Usuari ------");
-		System.out.print("---- PIULADES - Usuari ------");
-		System.out.print("---- PIULADES - Usuari ------");
+		System.out.println("---- PIULADES - Usuari ------\n");
+		System.out.println("---- PIULADES - Usuari ------\n");
+		System.out.println("---- PIULADES - Usuari ------\n");
+		System.out.println("---- PIULADES - Usuari ------\n");
 
 		Boolean exit = false;
 		int menuOption;
 		while(!exit)
 		{
-			System.out.print("[1]Twitt [2]Eliminar un Twitt [3]Visualitzar/Modificar configuracio [4]Afegir a grup [5]Twitts [0]Exit ");
+			System.out.println("[1]Twitt [2]Eliminar un Twitt [3]Visualitzar/Modificar configuracio [4]Afegir a grup [5]Twitts [0]Exit ");
 			menuOption = Integer.parseInt(br.readLine());
 			switch(menuOption)
 			{
@@ -247,6 +250,7 @@ public class Main {
 				case 4:
 					break;
 				case 5:
+					System.out.println(persona.ShowAllTwitts());
 					break;
 				case 0:
 					exit=true;
@@ -262,12 +266,15 @@ public class Main {
 	
 	
 	
-	public void Twitt(Persona p) throws IOException {
+	public static void Twitt(Persona p) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		System.out.print("Missatge:");
-		p.Twitt(br.readLine());
+		String missatge = br.readLine();
+		p.Twitt(missatge);
 		
 	}
+	
+	
 
 	///clear console
 	public static void clearScreen() {  
@@ -277,7 +284,7 @@ public class Main {
 	
 	
 	
-	public void Menu() throws NumberFormatException, IOException , ParseException {
+	public static void Menu() throws NumberFormatException, IOException , ParseException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		System.out.print("-------- PIULADES -----------");
 		System.out.print("-------- PIULADES -----------");

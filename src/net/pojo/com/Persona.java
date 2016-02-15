@@ -121,5 +121,13 @@ public class Persona {
 		this.Grupos.add(grupo);
 	}
 	
+	public String ShowAllTwitts(){
+		String result = "";
+		for(int i =0; i<twitts.size();i++){
+			result += "["+i+"]"+twitts.get(i).toString()+'\n';
+		}
+		return result;
+	}
+	
 	
 }
