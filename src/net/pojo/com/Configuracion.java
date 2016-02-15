@@ -54,4 +54,9 @@ public class Configuracion {
 		this.Fondo = fondo;
 		this.Privado = privado;
 	}
+	public Configuracion( String estado, String fondo, Boolean privado) {
+		this.Estado = estado;
+		this.Fondo = fondo;
+		this.Privado = privado;
+	}
 }

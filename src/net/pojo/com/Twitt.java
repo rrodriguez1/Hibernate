@@ -38,4 +38,9 @@ public class Twitt {
 		this.idPersona = idPersona2;
 		this.Texto = texto;
 	}
+	
+	public String Show()
+	{
+		return "["+this.id+"]"+Texto;
+	}
 }
