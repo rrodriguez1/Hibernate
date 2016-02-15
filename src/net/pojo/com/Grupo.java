@@ -47,7 +47,7 @@ public class Grupo {
 		this.fechaCreacion = new Date();
 	}
 	
-	
+	public Grupo(){};
 	
 	
 	

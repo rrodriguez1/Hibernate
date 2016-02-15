@@ -43,4 +43,5 @@ public class Twitt {
 	{
 		return "["+this.id+"]"+Texto;
 	}
+	public Twitt(){};
 }

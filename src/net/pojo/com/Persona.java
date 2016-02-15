@@ -111,10 +111,10 @@ public class Persona {
 		this.twitts = twitts;
 	}
 	public void Twitt(String msg){
-		twitts.add(new Twitt(idPersona,msg));
+		twitts.add(new Twitt(this.idPersona,msg));
 	}
 	public void Configuracion(String estado,String fondo, Boolean privado){
-		this.configuracion = new Configuracion(idPersona,estado,fondo,privado);
+		this.configuracion = new Configuracion(this.idPersona,estado,fondo,privado);
 	}
 	
 	public void addGrupo(Grupo grupo){
@@ -128,6 +128,7 @@ public class Persona {
 		}
 		return result;
 	}
+	public Persona(){}
 	
 	
 }

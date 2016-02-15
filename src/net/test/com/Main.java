@@ -76,26 +76,30 @@ public class Main {
 		Menu();
 	}
 
-	public Boolean EliminarTwit(Session session,int id) {
+	public static Boolean EliminarPersona(Persona persona) {
+		Session session = Connect(sf);
+		Transaction tx = null;
 		Boolean eliminado = false;
 		try{
-			Twitt twitt = (Twitt)session.get(Twitt.class,id);
-			session.delete(twitt);
+        	tx = session.beginTransaction();
+			session.delete(persona);
+			tx.commit();
 			eliminado = true;
 		}catch(Exception ex){
-			System.out.print("Twitt No eliminado");
+			System.out.print("Twitt No eliminado" + ex.toString());
 		}
 		return eliminado;
 	}
 
-	public Boolean UpdatePersoma (Persona persona) {
+	public static Boolean UpdatePersona (Persona persona) {
 		Session session = Connect(sf);
+		Transaction tx = null;
 		Boolean actualizado = false;
 		try{
-			//Persona per = (Persona)session.get(Configuracion.class,persona.getIdPersona());
-			//per.setConfiguracion(persona.getConfiguracion());
+        	tx = session.beginTransaction();
 			session.update(persona);
 			actualizado = true;
+			tx.commit();
 		} catch(Exception ex){
 
 		}
@@ -116,13 +120,13 @@ public class Main {
 	}
 	
 	
-	public static Object GetObject(SessionFactory sf, Class objeto, Integer id ){
+	public static Object GetObject(SessionFactory sf, java.lang.Class clase, Integer id ){
 		Session session = Connect(sf);
 		Transaction tx = null;
 		
 		try{
         	tx = session.beginTransaction();
-        	Object obj = session.get(objeto.getClass(),id);
+        	Object obj = session.get(clase,id);
         	tx.commit();
         	return obj;
         	
@@ -138,16 +142,18 @@ public class Main {
 	
 	
 	
+	
+	
 	public static Persona GetObjectPersona(Integer id){
 		return (Persona)GetObject(sf,Persona.class,id);
 	}
 	
-	public Grupo GetObjectGrupo(Integer id){
-		return (Grupo)GetObject(this.sf,Grupo.class,id);
+	public static Grupo GetObjectGrupo(Integer id){
+		return (Grupo)GetObject(sf,Grupo.class,id);
 	}
 	
-	public Pais GetObjetPais(Integer id){
-		return (Pais)GetObject(this.sf,Pais.class,id);
+	public static Pais GetObjetPais(Integer id){
+		return (Pais)GetObject(sf,Pais.class,id);
 	}
 	
 	
@@ -234,9 +240,10 @@ public class Main {
 
 		Boolean exit = false;
 		int menuOption;
+		int idGrup;
 		while(!exit)
 		{
-			System.out.println("[1]Twitt [2]Eliminar un Twitt [3]Visualitzar/Modificar configuracio [4]Afegir a grup [5]Twitts [0]Exit ");
+			System.out.println("[1]Twitt [2]Eliminar Persona [3]Visualitzar/Modificar configuracio [4]Afegir a grup [5]Twitts [0]Exit ");
 			menuOption = Integer.parseInt(br.readLine());
 			switch(menuOption)
 			{
@@ -244,10 +251,15 @@ public class Main {
 					Twitt(persona);
 					break;
 				case 2:
+					EliminarPersona(persona);
+					exit = true;
 					break;
 				case 3:
 					break;
 				case 4:
+					System.out.println("Id del grup");
+					idGrup = Integer.parseInt(br.readLine());
+					AfegirGrup(persona,idGrup);
 					break;
 				case 5:
 					System.out.println(persona.ShowAllTwitts());
@@ -266,11 +278,19 @@ public class Main {
 	
 	
 	
+	private static void AfegirGrup(Persona persona, int idGrup) {
+		 Grupo grup = GetObjectGrupo(idGrup);
+		 persona.addGrupo(grup);
+		 UpdatePersona(persona);
+		
+	}
+
 	public static void Twitt(Persona p) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		System.out.print("Missatge:");
 		String missatge = br.readLine();
 		p.Twitt(missatge);
+		UpdatePersona(p);
 		
 	}
 	
@@ -286,10 +306,7 @@ public class Main {
 	
 	public static void Menu() throws NumberFormatException, IOException , ParseException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		System.out.print("-------- PIULADES -----------");
-		System.out.print("-------- PIULADES -----------");
-		System.out.print("-------- PIULADES -----------");
-		System.out.print("-------- PIULADES -----------");
+		System.out.println("-------- PIULADES -----------");
 		Boolean exit = false;
 		int menuOption , personaId;
 		while(!exit)
@@ -310,7 +327,10 @@ public class Main {
 				case 4:
 					System.out.print("Id de la persona a modificar");
 					personaId = Integer.parseInt(br.readLine());
-					MenuPersona(GetObjectPersona(personaId));
+					Persona persona = GetObjectPersona(personaId);
+					if(persona != null)MenuPersona(persona);
+					else
+						System.out.print("Usuari no trobat\n");
 					break;
 				case 5:
 					break;

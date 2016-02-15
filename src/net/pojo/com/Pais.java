@@ -32,7 +32,7 @@ public class Pais {
 		this.idPais = idPais;
 	}
 	
-	
+	public Pais(){}
 	
 	
 	

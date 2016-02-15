@@ -37,6 +37,9 @@ public class Grupo_Persona {
 		this.idGrupoPersona = idGrupoPersona;
 		this.idPersona = idPersona;
 	}
+	public Grupo_Persona() {
+	}
+	
 	
 	
 	

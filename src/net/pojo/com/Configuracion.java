@@ -59,4 +59,5 @@ public class Configuracion {
 		this.Fondo = fondo;
 		this.Privado = privado;
 	}
+	public Configuracion(){}
 }
