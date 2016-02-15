@@ -8,7 +8,9 @@ import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction; 
 import org.hibernate.service.ServiceRegistry;
@@ -33,45 +35,7 @@ public class Main {
 	public static SessionFactory sf;
 	
 	public static void main(String[] args) throws ParseException, NumberFormatException, IOException {
-		// TODO Auto-generated method stub
-		/*
-		// pais test para hacer inserts el la base de datos
-		Pais paisTest = new Pais("Espanya","ESP");
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		Date nacimiento = sdf.parse("21/02/1994");
-		Grupo perroflautas = new Grupo("perroflautas");
-		Persona pedro = new Persona("Pedro","Lï¿½pez","Santfe city",nacimiento,"esp");
-		pedro.Twitt("La cosa esta muy mal ");
-		pedro.Twitt("Java caca");
-		pedro.Twitt("Ah julan! :(");
-		pedro.addGrupo(perroflautas);
-		pedro.Configuracion("EN LINEA","AZUL",false);
 		
-		// Configuracion hibernate
-		
-		Configuration c=new Configuration();
-
-        c.configure();
-        ServiceRegistry sr=new ServiceRegistryBuilder().applySettings(c.getProperties()).buildServiceRegistry();
-        SessionFactory sf=c.buildSessionFactory(sr);   
-        Session session = sf.openSession(); // abrir session, para cerrarla session.close()? p sf.close() o algo asi , probar
-        
-        Transaction tx = null; // result de la query
-        
-        try{
-        	tx = session.beginTransaction();
-        	session.save(paisTest);
-        	session.save(pedro);
-        	tx.commit();
-        	
-        	
-        }
-        catch (Exception e) 
-        {    if (tx!=null) tx.rollback(); e.printStackTrace(); }
-        finally
-
-        { session.close(); }
-        */
 		sf =CreateSessionFactory();
 		Menu();
 	}
@@ -255,6 +219,7 @@ public class Main {
 					exit = true;
 					break;
 				case 3:
+					EditarConfiguracio(persona);
 					break;
 				case 4:
 					System.out.println("Id del grup");
@@ -278,6 +243,43 @@ public class Main {
 	
 	
 	
+	private static void EditarConfiguracio(Persona persona) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println(persona.getConfiguracion().toString());
+		System.out.println("Vols cambiar la configuració? S/N");
+		String resposta = br.readLine();
+		Configuracion config;
+		if(resposta.toLowerCase().equals("s"))
+		{
+			config = CreaNovaConfiguracio(persona);
+			persona.setConfiguracion(config);
+			UpdatePersona(persona);
+		}
+			
+		
+	}
+
+	private static Configuracion CreaNovaConfiguracio(Persona persona) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String estado, fondo , privadoString;
+		Boolean privado;
+		System.out.println("Estado");
+		estado = br.readLine();
+		System.out.println("Color fondo");
+		fondo = br.readLine();
+		System.out.println("Privado s/n");
+		privadoString = br.readLine();
+		
+		if(privadoString.toLowerCase().equals("s"))
+			privado=true;
+		else if(privadoString.toLowerCase().equals("n"))
+			privado = false;
+		else
+			privado = persona.getConfiguracion().getPrivado();
+		
+		return new Configuracion(persona.getIdPersona(),estado,fondo,privado);
+	}
+
 	private static void AfegirGrup(Persona persona, int idGrup) {
 		 Grupo grup = GetObjectGrupo(idGrup);
 		 persona.addGrupo(grup);
@@ -311,7 +313,7 @@ public class Main {
 		int menuOption , personaId;
 		while(!exit)
 		{
-			System.out.print("[1]Crear Pais [2]Crear Grupo [3]Crear persona [4]Menu Persona [5]Listados [0]Exit ");
+			System.out.println("[1]Crear Pais [2]Crear Grupo [3]Crear persona [4]Menu Persona [5]Listados [0]Exit ");
 			menuOption = Integer.parseInt(br.readLine());
 			switch(menuOption)
 			{
@@ -333,6 +335,7 @@ public class Main {
 						System.out.print("Usuari no trobat\n");
 					break;
 				case 5:
+					MostrarListados();
 					break;
 				case 0:
 					exit=true;
@@ -343,5 +346,63 @@ public class Main {
 			clearScreen();
 		}
 		
+	}
+
+	private static void MostrarListados() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("-------- Llistats -----------");
+		Boolean exit = false;
+		int menuOption , personaId;
+		while(!exit)
+		{
+			System.out.println("[1]Paisos [2]Grups [3]Persones [0]Exit ");
+			menuOption = Integer.parseInt(br.readLine());
+			switch(menuOption)
+			{
+				case 1:
+					System.out.println(MostrarPaisos());
+					break;
+				case 2:
+					System.out.println(MostrarGrups());
+					break;
+				case 3:
+					System.out.println(MostrarPersones());
+					break;
+				case 0:
+					exit=true;
+					break;
+				default:
+					break;
+			}
+			clearScreen();
+		}
+		
+	}
+
+	private static String MostrarPersones() {
+		// TODO Auto-generated method stub
+		return MostrarElements("from Persona");
+	}
+
+	private static String MostrarGrups() {
+		// TODO Auto-generated method stub
+		return MostrarElements("from Grupo");
+	}
+
+	private static String MostrarPaisos() {
+		// TODO Auto-generated method stub
+		return MostrarElements("from Pais");
+	}
+
+	private static String MostrarElements(String string) {
+		Session session = Connect(sf);
+		Query query = session.createQuery(string);
+		List<Object> list = query.list();
+		
+		String resultat ="";
+		
+		for(Object obj : list)
+			resultat += obj.toString();
+		return resultat;
 	}
 }

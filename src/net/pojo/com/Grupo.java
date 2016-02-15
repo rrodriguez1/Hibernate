@@ -37,8 +37,7 @@ public class Grupo {
 	@Override
 	
 	public String toString() {
-		return "Grupo [idGrupo=" + idGrupo + ", nombre=" + nombre + ", fechaCreacion="
-				+ fechaCreacion + "]";
+		return "[" + idGrupo + "]" + nombre ;
 	}
 	
 	

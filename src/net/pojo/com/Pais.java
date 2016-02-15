@@ -19,7 +19,7 @@ public class Pais {
 	}
 	@Override
 	public String toString() {
-		return "Pais [nombre=" + nombre + ", paIso=" + paIso + "]";
+		return "["+idPais+"]"+paIso+"-"+nombre;
 	}
 	public Pais(String nombre, String paIso) {
 		this.nombre = nombre;
