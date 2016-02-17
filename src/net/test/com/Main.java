@@ -186,7 +186,7 @@ public class Main {
 		System.out.print("Pais(Codi ISO)");
 		pais = br.readLine();
 		
-		Persona persona= new Persona(nom, cognom,direccio, naixement,pais);
+		Persona persona= new Persona(nom, cognom,direccio, naixement,CercaPaisPerISO(pais));
 		
 		persona.Configuracion("", "#fffff", false);
 		
@@ -229,6 +229,7 @@ public class Main {
 				case 5:
 					System.out.println(persona.ShowAllTwitts());
 					break;
+
 				case 0:
 					exit=true;
 					break;
@@ -243,6 +244,21 @@ public class Main {
 	
 	
 	
+	private static void EliminarPais(int paisId) {
+		Pais pais = (Pais)GetObject(sf,Pais.class,paisId);
+		Session session = Connect(sf);
+		Transaction tx = null;
+		Boolean eliminado = false;
+		try{
+        	tx = session.beginTransaction();
+			session.delete(pais);
+			tx.commit();
+		}catch(Exception ex){
+			System.out.print("Twitt No eliminado" + ex.toString());
+		}
+		
+	}
+
 	private static void EditarConfiguracio(Persona persona) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println(persona.getConfiguracion().toString());
@@ -310,10 +326,10 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("-------- PIULADES -----------");
 		Boolean exit = false;
-		int menuOption , personaId;
+		int menuOption , personaId, idPais;
 		while(!exit)
 		{
-			System.out.println("[1]Crear Pais [2]Crear Grupo [3]Crear persona [4]Menu Persona [5]Listados [0]Exit ");
+			System.out.println("[1]Crear Pais [2]Crear Grupo [3]Crear persona [4]Menu Persona [5]Listados [6]EliminarPais [0]Exit ");
 			menuOption = Integer.parseInt(br.readLine());
 			switch(menuOption)
 			{
@@ -336,6 +352,12 @@ public class Main {
 					break;
 				case 5:
 					MostrarListados();
+					break;
+				case 6:
+					System.out.print("Id dl pais a eliminar");
+					idPais = Integer.parseInt(br.readLine());
+					idPais = Integer.parseInt(br.readLine());
+					EliminarPais(idPais);
 					break;
 				case 0:
 					exit=true;
@@ -392,6 +414,14 @@ public class Main {
 	private static String MostrarPaisos() {
 		// TODO Auto-generated method stub
 		return MostrarElements("from Pais");
+	}
+	
+	private static Pais CercaPaisPerISO(String iso){
+		Session session = Connect(sf);
+		String hql = "FROM Pais P WHERE P.paIso = '"+iso+"'";
+		Query query = session.createQuery(hql);
+		List results = query.list();
+		return (Pais)results.get(0);
 	}
 
 	private static String MostrarElements(String string) {

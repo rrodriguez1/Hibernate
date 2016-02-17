@@ -15,7 +15,7 @@ public class Persona {
 	private Date fechaNacimiento;
 	private Date fechaAlta;
 	private List twitts;
-	private String idPais;
+	private Pais pais;
 	private Set Grupos;
 	private Configuracion configuracion;
 
@@ -63,45 +63,42 @@ public class Persona {
 	public List<Twitt> getTwitts() {
 		return twitts;
 	}
-	public String getIdPais() {
-		return idPais;
+	public Pais getIdPais() {
+		return pais;
 	}
-
 	public Set getGrupos() {
 		return Grupos;
 	}
-
 	public void setGrupos(Set grupos) {
 		Grupos = grupos;
 	}
-
-	public void setIdPais(String idPais) {
-		this.idPais = idPais;
+	public void setIdPais(Pais idPais) {
+		this.pais = idPais;
 	}
-
-// 4.2.21
-	
-
 	@Override
 	public String toString() {
 		return "[" + idPersona + "]" + nombre +" "+apellidos;
 	}
-	
-
-	
-	public Persona(String nombre, String apellidos, String direccion, Date fechaNacimiento, String idPais) 
+	public Persona(String nombre, String apellidos, String direccion, Date fechaNacimiento, Pais pais) 
 	{
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.direccion = direccion;
 		this.fechaNacimiento = fechaNacimiento;
 		twitts = new ArrayList<Twitt>();
-		this.idPais = idPais;
+		this.pais = pais;
 		this.fechaAlta = new Date();
 		this.Grupos = new HashSet();
 	}
+	public Pais getPais() {
+		return pais;
+	}
+	public void setPais(Pais pais) {
+		this.pais = pais;
+	}
+
 	
-	
+
 	public Date getFechaNacimiento() {
 		return fechaNacimiento;
 	}

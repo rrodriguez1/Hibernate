@@ -11,7 +11,13 @@
  <property name="direccion" column="direccion" type="string"/> 
  <property name="fechaNacimiento" column="fechanacimiento" type="date"/> 
  <property name="fechaAlta" column="fechaalta" type="date"/> 
- <property name="idPais" column="idpais" type="string"/> 
+ 
+ <many-to-one name="pais" column="idPais" 
+       class="net.pojo.com.Pais" not-null="true" />
+       
+ <!-- <property name="idPais" column="idpais" type="string"/>  -->
+ 
+ 
  <list name="Twitts" cascade="all">
  	<key column="idpersona"/>
  	<list-index>
